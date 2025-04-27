@@ -1,8 +1,6 @@
 import React from 'react';
 import Footer from "./Footer";
 
-import Footer from './footer'; // 👈 import Footer at the top
-
 const Jobs = () => {
   return (
     <div className="cont mt-8">
