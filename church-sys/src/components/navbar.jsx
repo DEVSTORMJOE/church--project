@@ -71,7 +71,7 @@ const Navbar = () => {
 
         {/* Institution Name Center */}
         <h1 className="absolute left-1/2 transform -translate-x-1/2 text-2xl md:text-3xl font-extrabold text-white tracking-wide">
-          My Institution
+          OUR LADY OF MERCY CATHOLIC JUJA
         </h1>
 
         {/* Right side: Profile + Menu */}
