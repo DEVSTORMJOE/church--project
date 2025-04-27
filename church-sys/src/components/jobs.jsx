@@ -68,7 +68,7 @@ const Jobs = () => {
             <h3 className="text-2xl font-semibold text-blue-800 mb-2">Worship Leader</h3>
             <p className="text-gray-700 mb-4">Lead our worship team and guide the congregation in powerful worship experiences that connect hearts to God.</p>
             <p className="text-gray-600 mb-4">
-              <strong>Responsibilities:</strong> Leading worship during services, developing the worship team, and collaborating with the pastoral team to enhance worship services.
+              <strong>Responsibilities:</strong> Leading worship during services, developing the worship team, and collaborating with the pastoral team to enhance worship service.
             </p>
             <p className="text-gray-600 mb-4">
               <strong>Requirements:</strong> Experience leading worship, proficiency with instruments or vocals, and a passion for worship.
