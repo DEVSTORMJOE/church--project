@@ -1,41 +1,130 @@
-// import React from 'react';
+import React, { useEffect, useState, useRef } from "react";
+import { CalendarDays, MapPin } from "lucide-react";
+import Footer from "./Footer";
 
-// const Events = () => {
-//   return (
-//     <div>
-//       <h2>Upcoming Events</h2>
-//       <ul>
-//         <li>April 30: Community Outreach</li>
-//         <li>May 5: Youth Worship Night</li>
-//         <li>May 12: Mother's Day Celebration</li>
-//       </ul>
-//     </div>
-//   );
-// };
+// Fake Events Data with random image URLs
+const events = [
+  {
+    title: "Annual General Meeting",
+    date: "June 15, 2025",
+    location: "Matters Church Hall",
+    description: "Join us for our Annual General Meeting to discuss key achievements, financials, and future plans.",
+    image: "https://picsum.photos/400/250?random=1", // Random image from Lorem Picsum
+  },
+  {
+    title: "Fundraising Gala",
+    date: "August 10, 2025",
+    location: "Matters Church Gardens",
+    description: "A grand night to support our community projects. Dress code: Elegant!",
+    image: "https://picsum.photos/400/250?random=2", // Random image from Lorem Picsum
+  },
+  {
+    title: "Youth Mentorship Workshop",
+    date: "September 5, 2025",
+    location: "Community Center",
+    description: "Empowering our youth with knowledge and skills for the future.",
+    image: "https://picsum.photos/400/250?random=3", // Random image from Lorem Picsum
+  },
+  {
+    title: "Community Clean-Up Day",
+    date: "October 12, 2025",
+    location: "Village Square",
+    description: "Let’s come together to clean and beautify our neighborhood!",
+    image: "https://picsum.photos/400/250?random=4", // Random image from Lorem Picsum
+  },
+  {
+    title: "End Year Celebration",
+    date: "December 20, 2025",
+    location: "Matters Church Clubhouse",
+    description: "Celebrate the year’s achievements with music, food, and fun!",
+    image: "https://picsum.photos/400/250?random=5", // Random image from Lorem Picsum
+  },
+];
 
-// export default Events;
-import React from 'react';
+function Events() {
+  const [visibleEvents, setVisibleEvents] = useState([]);
+  const eventRefs = useRef([]);
 
-const Events = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-index"));
+            setVisibleEvents((prev) => [...prev, index]);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the element is visible
+      }
+    );
+
+    eventRefs.current.forEach((event) => {
+      if (event) observer.observe(event);
+    });
+
+    return () => {
+      eventRefs.current.forEach((event) => {
+        if (event) observer.unobserve(event);
+      });
+    };
+  }, []);
+
   return (
-    <div
-      className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center text-white p-8"
-      style={{
-        backgroundImage: `url('https://img.freepik.com/free-photo/close-up-beautiful-christ-cathedral_1268-15663.jpg?t=st=1745685834~exp=1745689434~hmac=49bb086d29d3a9546ac0a31483e63a495072d66273e782713f88669b1b353d0f&w=1380')`,
-      }}
-    >
-      <div className="bg-black bg-opacity-60 p-8 rounded-lg max-w-3xl text-center">
-        <h2 className="text-4xl font-bold mb-4">Upcoming Events</h2>
-        <p className="mb-4 text-lg leading-relaxed">
-          Join us for worship services, community outreach, youth gatherings, and seasonal celebrations.
-          Our events are designed to bring our community together in faith, fun, and service.
-        </p>
-        <p className="text-lg leading-relaxed">
-          Check out the event calendar to participate and invite your family and friends!
-        </p>
+    <div className="cont mt-8">
+      <div className="bg-gray-50 min-h-screen py-10 px-6 md:px-20 mt-[-2rem]">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-5xl font-bold text-blue-800 mb-4">
+            Upcoming Church Events
+          </h1>
+          <p className="text-gray-600 text-md md:text-lg">
+            Stay connected. Stay inspired. Join us for these meaningful gatherings!
+          </p>
+        </div>
+
+        {/* Events Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {events.map((event, index) => (
+            <div
+              key={index}
+              data-index={index}
+              ref={(el) => (eventRefs.current[index] = el)}
+              className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden
+                ${visibleEvents.includes(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+            >
+              <div className="h-48 w-full overflow-hidden">
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+              <div className="p-6">
+                <h2 className="text-xl font-bold text-blue-800 mb-2">{event.title}</h2>
+                <div className="flex items-center gap-2 text-gray-500 text-sm mb-2">
+                  <CalendarDays size={16} /> {event.date}
+                </div>
+                <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
+                  <MapPin size={16} /> {event.location}
+                </div>
+                <p className="text-gray-600 text-sm">
+                  {event.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer Note */}
+        <div className="text-center text-gray-400 text-sm mt-16">
+          <p>Mark your calendar and be part of our church's exciting journey! 📅✨</p>
+        </div>
       </div>
+      <Footer />
     </div>
   );
-};
+}
 
 export default Events;
