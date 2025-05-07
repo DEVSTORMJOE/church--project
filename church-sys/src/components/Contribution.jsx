@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Banknote, CreditCard, PhoneCall, X } from "lucide-react";
-import Footer from "./Footer";
+import Footer from "./footer";
 
 function Contributions() {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./Footer";
+import Footer from "./footer";
 
 function Profile() {
   // Fake Data for Church Leadership and Members

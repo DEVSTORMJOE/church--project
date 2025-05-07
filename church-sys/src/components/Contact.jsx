@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Footer from "./Footer";
+import Footer from "./footer";
 
 function Contact() {
   const [formData, setFormData] = useState({

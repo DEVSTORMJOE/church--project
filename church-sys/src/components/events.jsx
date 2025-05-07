@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { CalendarDays, MapPin } from "lucide-react";
-import Footer from "./Footer";
+import Footer from "./footer";
 
 // Fake Events Data with random image URLs
 const events = [
